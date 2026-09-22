@@ -1,0 +1,186 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-default);
+  padding: 0.75rem 1.75rem;
+}
+
+.header-inner {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Brand */
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-badge {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(30, 41, 59, 0.9));
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+}
+
+.logo-icon-svg {
+  color: var(--accent-blue);
+  width: 22px;
+  height: 22px;
+}
+
+.logo-pulse-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-version-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.brand-subtitle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+/* Nav */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(30, 41, 59, 0.6);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-default);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+
+.nav-item:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item--active {
+  background: var(--accent-blue);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+}
+
+.nav-item--active:hover {
+  background: var(--accent-blue);
+  color: #ffffff;
+}
+
+.nav-badge {
+  font-size: 0.65rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.nav-item--active .nav-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Status Telemetry */
+.header-telemetry {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--safe-emerald);
+  box-shadow: 0 0 8px var(--safe-emerald);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.status-state {
+  color: var(--safe-emerald);
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .brand-subtitle,
+  .brand-version-pill,
+  .status-indicator {
+    display: none;
+  }
+}

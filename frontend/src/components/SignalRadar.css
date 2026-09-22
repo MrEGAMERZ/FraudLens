@@ -1,8 +1,106 @@
-.radar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
-.signal-bars { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
-.signal-row { display: grid; grid-template-columns: 140px 1fr 36px 36px; align-items: center; gap: 0.5rem; }
-.signal-label { font-size: 0.78rem; color: var(--muted); }
-.signal-bar-track { height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; }
-.signal-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
-.signal-score { font-size: 0.78rem; font-weight: 600; text-align: right; }
-.signal-weight { font-size: 0.7rem; color: var(--muted); text-align: right; }
+.radar-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.radar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.radar-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent-blue);
+}
+
+.radar-badge-icon {
+  color: var(--accent-blue);
+}
+
+.radar-chart-box {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+/* Bars stack */
+.signal-bars-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.signal-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.signal-bar-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.signal-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.signal-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.signal-desc {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.signal-scores-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.signal-risk-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.signal-weight-pill {
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-default);
+  padding: 1px 5px;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+}
+
+.signal-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.signal-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

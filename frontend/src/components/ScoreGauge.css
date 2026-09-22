@@ -1,6 +1,167 @@
-.gauge-card, .radar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
-.card-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1rem; }
-.gauge-wrapper { display: flex; flex-direction: column; align-items: center; }
-.gauge-svg { width: 180px; }
-.gauge-bands { display: flex; gap: 0.75rem; font-size: 0.72rem; margin-top: 0.25rem; }
-.gauge-verdict { text-align: center; border-radius: 8px; border: 1px solid; padding: 0.6rem 1rem; font-weight: 600; font-size: 0.95rem; margin-top: 0.75rem; }
+.gauge-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  height: 100%;
+}
+
+.gauge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.gauge-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.gauge-badge-icon {
+  color: var(--accent-blue);
+}
+
+.telemetry-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-default);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.telemetry-icon {
+  color: var(--warning-amber);
+}
+
+.gauge-visual-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0 1rem 0;
+  width: 100%;
+}
+
+.gauge-svg {
+  width: 100%;
+  max-width: 250px;
+  overflow: visible;
+}
+
+.score-arc {
+  transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gauge-score-value {
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.gauge-score-max {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.gauge-bands-legend {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 260px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-top: -8px;
+}
+
+.band-safe { color: var(--safe-emerald); }
+.band-caution { color: var(--warning-amber); }
+.band-critical { color: var(--danger-rose); }
+
+/* Verdict Banner */
+.verdict-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.verdict-icon-container {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.verdict-text-block {
+  flex: 1;
+}
+
+.verdict-headline {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.verdict-explanation {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Telemetry Grid */
+.verdict-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-top: auto;
+}
+
+.telemetry-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.telemetry-cell-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.telemetry-cell-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.telemetry-severity-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}

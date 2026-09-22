@@ -1,27 +1,222 @@
+/* FraudLens Global Styling & Design Tokens
+   Inspired by VirusTotal, CrowdStrike/Palantir, Sift, and Apple HIG (DESIGN-apple.md)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Surface & Canvas Tokens */
+  --bg-base: #0F172A;
+  --surface-card: #1E293B;
+  --surface-card-hover: #273549;
+  --surface-subtle: #141E30;
+  --surface-overlay: rgba(15, 23, 42, 0.85);
+
+  /* Borders & Hairlines */
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.15);
+  --border-focus: #3B82F6;
+
+  /* Typography Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #0F172A;
+
+  /* Semantic Threat Colors */
+  --accent-blue: #3B82F6;
+  --accent-blue-focus: #60A5FA;
+  --accent-blue-glow: rgba(59, 130, 246, 0.25);
+  
+  --safe-emerald: #10B981;
+  --safe-emerald-glow: rgba(16, 185, 129, 0.2);
+  
+  --warning-amber: #F59E0B;
+  --warning-amber-glow: rgba(245, 158, 11, 0.2);
+  
+  --danger-rose: #EF4444;
+  --danger-rose-glow: rgba(239, 68, 68, 0.25);
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 9999px;
+
+  /* Elevations */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 24px rgba(59, 130, 246, 0.18);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-:root {
-  --bg: #0a0e1a;
-  --surface: #111827;
-  --border: #1f2937;
-  --text: #f9fafb;
-  --muted: #6b7280;
-  --green: #10b981;
-  --amber: #f59e0b;
-  --red: #ef4444;
-  --blue: #3b82f6;
-  --purple: #8b5cf6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.5;
   min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(ellipse at 50% -20%, rgba(59, 130, 246, 0.12), transparent 70%),
+    radial-gradient(circle at 100% 100%, rgba(30, 41, 59, 0.5), transparent 50%);
+  background-attachment: fixed;
 }
 
-a { color: var(--blue); }
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-blue-focus);
+}
+
+button {
+  font-family: var(--font-sans);
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+input, textarea {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  outline: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Animations */
+@keyframes laserSweep {
+  0% {
+    top: 0%;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.2;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Monospace Utilities */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Print Stylesheet for High-Fidelity PDF Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    background-image: none !important;
+  }
+
+  .app-header,
+  .input-section,
+  .btn-demo,
+  .scanner-actions-bar,
+  .print-hide {
+    display: none !important;
+  }
+
+  .results {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .gauge-card,
+  .radar-card,
+  .funnel-card,
+  .evidence-card,
+  .domain-card,
+  .ioc-card,
+  .annotated-text-card {
+    background: #f9fafb !important;
+    border: 1px solid #e5e7eb !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .card-title,
+  .gauge-verdict,
+  .stage-name {
+    color: #111827 !important;
+  }
+
+  .text-primary,
+  .mono {
+    color: #111827 !important;
+  }
+}
