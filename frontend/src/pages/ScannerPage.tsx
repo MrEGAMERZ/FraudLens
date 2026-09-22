@@ -46,7 +46,8 @@ export default function ScannerPage() {
     setResult(null)
     try {
       const payload: ScanInput = tab === 'text' ? { text: input } : { url: input }
-      const { data } = await axios.post<ScanResult>('/api/scan', payload, { timeout: 30000 })
+      const apiUrl = import.meta.env.VITE_API_URL || ''
+      const { data } = await axios.post<ScanResult>(`${apiUrl}/api/scan`, payload, { timeout: 30000 })
       setResult(data)
     } catch (err: any) {
       setError(err?.response?.data?.error || 'Scan failed. Make sure the backend is running.')
