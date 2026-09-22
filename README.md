@@ -18,13 +18,9 @@
 
 ---
 
-### 🎥 Project Demo
+## 🎯 Chosen Vertical
 
-
-
----
-
-## 🎯 Problem Statement Alignment & High-Impact Value
+**Vertical:** Fake Offer Letter & Phishing Inspector
 
 | Dimension | Real-World Reality & Alignment |
 |---|---|
@@ -41,7 +37,9 @@ Scammers have already adapted their vocabulary — they use formal corporate ton
 
 ---
 
-## 🔑 The Core Innovation: Fraud Funnel Compression Score (FFCS)
+## 🧠 Approach and Logic
+
+**The Core Innovation: Fraud Funnel Compression Score (FFCS)**
 
 Instead of asking *"does this email have scary words?"*, FraudLens models the canonical hiring pipeline:
 
@@ -98,6 +96,14 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
 - 🔴 **61 – 100:** High-Confidence Scam Pattern
 
 ---
+
+## ⚙️ How the Solution Works
+
+**1. Smart, Dynamic Assistant (Counter-Inquiry Generator)**: FraudLens acts as a dynamic assistant, utilizing Gemini to generate safe, tactical counter-inquiries. It uses **logical decision making based on user context** to dynamically tailor responses (e.g. demanding a corporate CIN, refusing upfront deposits) that empower users to verify legitimacy safely without exposing personal data.
+
+**2. Multi-Modal Processing Pipeline**: Users can provide text, a URL, or upload documents (PDF, DOCX). The Express Backend handles extraction and proxying.
+
+**3. AI Evaluation & Fallback**: The FastAPI ML Service parses the text using `gemini-1.5-flash` to extract the 6 funnel stages and compute a severity score. If the AI is unavailable, a deterministic local regex-based heuristic takes over to ensure **practical and real-world usability** under all conditions.
 
 ## 🏗️ Architecture
 
@@ -247,8 +253,19 @@ Open `http://localhost:5173` in your browser.
 - **Legitimate Case:** A formal offer referencing an initial screening call, 2 rounds of technical interviews, salary negotiation, written benefits, conditional on background check, zero upfront fees.  
   *Result:* **Full Process Present** + **Legitimate Corporate Domain** → **Scam Threat Index ~12 (Green)**.
 
+---
 
-## 🔌 Open Source & Agent Skill Integration (`SKILL.md`)
+## 📌 Assumptions Made
+
+In formulating and engineering the FraudLens detection architecture, the following domain assumptions are made:
+
+1. **Recruitment Process Linearity & Integrity:** Legitimate corporate and enterprise employers follow a multi-stage vetting process (screening → technical evaluation → negotiation → written contract → background check). Legitimate employers never require job candidates to pay advance equipment deposits, processing fees, or onboarding kit charges via personal payment rails (UPI, gift cards, crypto, or personal bank accounts).
+2. **Domain Identity as a Security Trust Anchor:** Authentic corporate recruiting communication originates from or references an authentic enterprise domain with established DNS MX routing and verifiable historical registration age (>90 days). Newly registered domains (<30 days) utilizing keyword permutations (`-careers`, `-india`, `-hr`) represent high-risk lookalike patterns.
+3. **Candidate Data Privacy & Ephemeral Ingestion:** Candidates submitting sensitive offer letters, contracts, or resumes require strict privacy guarantees. Therefore, all document parsing (PDF, DOCX, TXT) operates strictly in-memory (`Buffer`) with **zero disk persistence or logging of personally identifiable content**.
+4. **Resilience Against AI Service Outages:** External LLM APIs can encounter latency spikes or rate-limiting during high-concurrency periods. FraudLens assumes network volatility and incorporates a zero-downtime local heuristic process judge fallback so scans never fail.
+5. **Human-in-the-Loop Defense:** FraudLens is designed as an assistive threat intelligence tool rather than an opaque black box. It provides explainable evidence, process skip visualizations, and actionable counter-inquiry response templates to empower user decision-making.
+
+---
 
 FraudLens is built not just as a standalone web app, but as a **reusable security primitive** for other applications, developer platforms, and AI agents.
 
