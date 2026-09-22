@@ -86,3 +86,11 @@ FraudLens_Project_Idea.md
 *.pdf
 project-docs-pack.md
 CLAUDE.md
+
+# Large files and hackathon assets
+_PROMPTWARS*.pdf
+IDea/
+brag-output/
+*.mp4
+*.gif
+*.png
