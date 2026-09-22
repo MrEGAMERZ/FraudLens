@@ -3,15 +3,24 @@
 **Last updated:** 2026-09-22  
 **Status:** MVP — Hackathon submission
 
-## Problem
+## 🎯 Problem Statement Alignment & High Impact
 
-Job seekers and renters receive fake offer letters that bypass spam filters because they use formal tone, letterheads, and real company names. Existing scanners use keyword lists — but scammers have adapted their vocabulary. A keyword-based scanner is already behind the scam it is scanning.
+### 1. The Root Challenge
+Modern Generative AI enables scammers to generate grammatically impeccable, highly persuasive offer letters and rental solicitations that bypass traditional email filters. Legacy fraud detection tools rely on static keyword blacklists (e.g. searching for "urgent", "lottery", "fee"), which fail because threat actors continuously adapt their vocabulary. 
+
+### 2. User Needs & Target Vulnerability Profile
+- **Primary Users:** University students, fresh college graduates, and remote entry-level job seekers navigating high-volume application cycles.
+- **Secondary Users:** Renters seeking subleases and gig workers responding to remote task recruitment.
+- **Critical Need:** Users require transparent, explainable forensic reasoning—not an arbitrary black-box score—and actionable counter-measures before transferring irreversible funds (UPI deposits, equipment fees).
+
+### 3. Core Objectives & Solution
+FraudLens shifts fraud detection from **vocabulary to process structure**. By modeling the 8 canonical recruitment milestones (Application → Screening → Interview → Negotiation → Offer → Background Check → Contract → Onboarding), FraudLens detects **Process Compression (FFCS)** where multiple vetting stages are skipped to rush victims into financial transfer.
 
 ## Target User
 
-- Job seekers receiving suspicious offer letters
-- Renters receiving suspicious rental agreement demands
-- Hackathon judges evaluating genuinely novel AI approaches
+- Job seekers evaluating suspicious employment contracts and offer letters
+- Students facing upfront deposit demands for campus placement drives
+- Hackathon and enterprise evaluators assessing explainable AI security systems
 
 ## Goals
 

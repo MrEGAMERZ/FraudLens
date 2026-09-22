@@ -24,6 +24,17 @@
 
 ---
 
+## 🎯 Problem Statement Alignment & High-Impact Value
+
+| Dimension | Real-World Reality & Alignment |
+|---|---|
+| **The Root Challenge** | Generative AI has eliminated obvious phishing signals (grammar errors, broken syntax, crude formatting). Modern scammers generate convincing, professional communications. Traditional security tools rely on **static keyword lists** — which fail because scammers constantly adapt their vocabulary. |
+| **User Needs & Vulnerability** | Students, fresh graduates, and remote job seekers are uniquely vulnerable during high-stress hiring periods. They need **auditable explainability** (understanding *why* an offer is fake) and an **active defense strategy** before making irreversible financial transfers (UPI deposits, equipment fees). |
+| **Core Objectives & Solution** | FraudLens shifts fraud detection from **vocabulary to process structure**. By analyzing **Process Compression (FFCS)** across the 8 canonical recruitment stages, FraudLens catches scams regardless of how well-written they are. |
+| **Measurable Real-World Impact** | 1. **Zero-Day Scam Detection:** Flags new fraud templates on day 1 by evaluating stage skipping rather than known phrase lists.<br>2. **Active Threat Mitigation:** Equips victims with the **AI Safe Counter-Inquiry Generator** to test recruiter legitimacy without exposing personal data.<br>3. **Zero-Retention Privacy:** No user documents or sensitive resumes are stored on disk. |
+
+---
+
 **FraudLens** is an explainable job offer and phishing scanner that detects **process compression**, not just scary keywords.
 
 Scammers have already adapted their vocabulary — they use formal corporate tone, authentic letterheads, and real employer names. Keyword scanners are a year behind the scam. FraudLens evaluates the **shape of the hiring or rental process**: legitimate funnels have multiple stages (application → screening → interview → negotiation → offer → background check → onboarding). Fraudulent offers compress 6+ stages into 1 (*"You are selected, now pay ₹4,999"*).
