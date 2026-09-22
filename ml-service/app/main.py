@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import Optional
 import httpx
 import os
+import re
 
 from judge import run_judge
 
@@ -44,7 +45,6 @@ async def judge(req: JudgeRequest):
                 # Very basic HTML text extraction
                 text = r.text
                 # Strip obvious HTML tags
-                import re
                 content = re.sub(r'<[^>]+>', ' ', text)
                 content = re.sub(r'\s+', ' ', content).strip()[:4000]
         except Exception as e:
