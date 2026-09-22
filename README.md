@@ -3,15 +3,24 @@
 > **PromptWars × GEN AI Club Hackathon Submission**  
 > *Track: Fake Offer Letter & Phishing Inspector | Presidency University*
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-fraud--lens--eosin.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://fraud-lens-eosin.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-MrEGAMERZ%2FFraudLens-181717?style=for-the-badge&logo=github)](https://github.com/MrEGAMERZ/FraudLens)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Gemini](https://img.shields.io/badge/Google%20Gemini-8E75C2?logo=google&logoColor=white)](https://ai.google.dev/)
 
+---
+
+### 🌐 Live Application
+👉 **Experience the live scanner:** **[https://fraud-lens-eosin.vercel.app/](https://fraud-lens-eosin.vercel.app/)**
+
+---
+
 **FraudLens** is an explainable job offer and phishing scanner that detects **process compression**, not just scary keywords.
 
-Scammers have already adapted their vocabulary — they use formal corporate tone, authentic letterheads, and real employer names. Keyword scanners are a year behind the scam. FraudLens evaluates the **shape of the hiring or rental process**: legitimate funnels have multiple stages (application → screening → interview → negotiation → offer → background check → onboarding). Fraudulent offers compress 6+ stages into 1 ("You are selected, now pay ₹4,999").
+Scammers have already adapted their vocabulary — they use formal corporate tone, authentic letterheads, and real employer names. Keyword scanners are a year behind the scam. FraudLens evaluates the **shape of the hiring or rental process**: legitimate funnels have multiple stages (application → screening → interview → negotiation → offer → background check → onboarding). Fraudulent offers compress 6+ stages into 1 (*"You are selected, now pay ₹4,999"*).
 
 ---
 
@@ -30,7 +39,7 @@ STAGE 6 — Signed contract & onboarding paperwork
 STAGE 7 — Payroll & equipment logistics (never upfront fee)
 ```
 
-A fraudulent offer jumps directly from **Stage 0** to **Stage 7** ("pay for your onboarding laptop"). FraudLens maps every submitted text against this process graph and outputs:
+A fraudulent offer jumps directly from **Stage 0** to **Stage 7** (*"pay for your onboarding laptop"*). FraudLens maps every submitted text against this process graph and outputs:
 - **Stages Present:** Verified through explicit text evidence.
 - **Stages Explicitly Skipped:** Detected shortcuts (*"selected without interview"*, *"immediate joining"*).
 - **Stage Ordering Violations:** Payment requested before any interview mention.
@@ -48,7 +57,7 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
 |---|---|---|
 | **Signal A: FFCS** (35%) | Measures stage skip ratio and process compression | Gemini Flash semantic process classifier |
 | **Signal B: Financial Ask** (20%) | Evaluates payment type (refundable vs upfront fee), urgency pressure, and channel (UPI/Crypto vs corporate invoice) | Gemini structured fingerprinting |
-| **Signal C: Domain & Infra** (20%) | Verifies sender domain age, registration date, and MX records | Keyless RDAP (`rdap.org`) + DNS MX inspection |
+| **Signal C: Domain & Infra** (20%) | Verifies sender domain age, registration date, TLS/SSL certificate issue age, and MX records | Keyless RDAP (`rdap.org`) + TLS Handshake + DNS MX inspection |
 | **Signal D: Identity Verification** (15%) | Checks domain typosquatting and impersonation of known employers | Edit-distance / homoglyph heuristic against canonical domains |
 | **Signal E: Linguistic Manipulation** (10%) | Detects manipulation techniques (authority mimicry, artificial scarcity, isolation language) | Gemini psychological manipulation classifier |
 
@@ -64,6 +73,7 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
 ```
                        ┌─────────────────────────────────────────┐
                        │           User Browser / UI             │
+                       │   https://fraud-lens-eosin.vercel.app   │
                        └────────────────────┬────────────────────┘
                                             │ HTTP / JSON
                                             ▼
@@ -79,15 +89,17 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
                        ┌─────────────────────────────────────────┐
                        │      Backend API (Node.js + Express)    │
                        │      - Orchestrates scan workflow       │
+                       │      - TLS certificate verification     │
                        │      - Multi-signal fusion engine       │
                        └───────────┬───────────────────┬─────────┘
                                    │                   │
-                  POST /judge      │                   │ RDAP & DNS lookups
+                  POST /judge      │                   │ RDAP, TLS & DNS lookups
                                    ▼                   ▼
       ┌──────────────────────────────────┐   ┌─────────────────────────────┐
       │   ML Service (FastAPI + Python)  │   │  External Infrastructure    │
       │   - Gemini 1.5/2.0 Flash Judge   │   │  - rdap.org (Keyless RDAP)  │
-      │   - Structured JSON schema       │   │  - DNS MX Mail Verification │
+      │   - Structured JSON schema       │   │  - TLS / SSL Certificate    │
+      │                                  │   │  - DNS MX Mail Verification │
       └──────────────────────────────────┘   └─────────────────────────────┘
 ```
 
@@ -97,7 +109,7 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
 
 ```
 FraudLens/
-├── frontend/                  # React + Vite + TypeScript web application
+├── frontend/                  # React + Vite + TypeScript web application (Vercel)
 │   ├── src/
 │   │   ├── components/        # ScoreGauge, FunnelBar, SignalRadar, EvidencePanel, DomainCard
 │   │   ├── pages/             # ScannerPage (main dashboard)
@@ -107,7 +119,7 @@ FraudLens/
 ├── backend/                   # Node.js + Express + TypeScript API server
 │   ├── src/
 │   │   ├── routes/            # /api/scan endpoint
-│   │   ├── services/          # domain.ts (RDAP/DNS), fusion.ts (weighted scoring)
+│   │   ├── services/          # domain.ts (RDAP/DNS/TLS), fusion.ts (weighted scoring)
 │   │   └── types.ts           # Schema definitions
 │   └── package.json
 ├── ml-service/                # Python FastAPI service for AI reasoning
@@ -120,7 +132,7 @@ FraudLens/
 │   ├── ARCHITECTURE.md        # Deep dive into components and data flow
 │   ├── DESIGN.md              # UI/UX design rationale and wireframes
 │   ├── RULES.md               # Development rules & definition of done
-│   ├── TASKS.md               # Task tracker and roadmap
+│   ├── TASKS.md               # Task tracker and roadmap (all core tasks DONE)
 │   ├── TEST_PLAN.md           # End-to-end demo script and verification
 │   ├── SECURITY.md            # Threat model, secrets policy, safe handling
 │   ├── DECISIONS.md           # Architecture Decision Records (ADRs)
@@ -150,7 +162,7 @@ All technical documentation is organized in [`docs/`](docs/):
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Local Development)
 
 ### 1. ML Service (FastAPI + Gemini Flash)
 
@@ -196,7 +208,7 @@ Open `http://localhost:5173` in your browser.
 ## 🧪 Demo Scenarios
 
 - **Scam Case:** A letter congratulating the applicant, claiming immediate selection with no technical interview, demanding a ₹4,999 refundable equipment fee to a UPI ID within 24 hours.  
-  *Result:* **FFCS Flagged (Stages 1-6 skipped)** + **Domain Risk High** → **Scam Threat Index ~85 (Red)**.
+  *Result:* **FFCS Flagged (Stages 1-6 skipped)** + **Domain/TLS Risk High** → **Scam Threat Index ~85 (Red)**.
 - **Legitimate Case:** A formal offer referencing an initial screening call, 2 rounds of technical interviews, salary negotiation, written benefits, conditional on background check, zero upfront fees.  
   *Result:* **Full Process Present** + **Legitimate Corporate Domain** → **Scam Threat Index ~12 (Green)**.
 
@@ -207,6 +219,7 @@ Open `http://localhost:5173` in your browser.
 Built for **PromptWars × GEN AI Club Hackathon**, Presidency University (September 2026).
 - Track: Fake Offer Letter & Phishing Inspector
 - Developed by **Mohammad Rehan** ([@MrEGAMERZ](https://github.com/MrEGAMERZ))
+- Live Web Application: [https://fraud-lens-eosin.vercel.app/](https://fraud-lens-eosin.vercel.app/)
 
 ---
 

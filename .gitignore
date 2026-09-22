@@ -75,6 +75,8 @@ brag-output/
 *.wav
 *.mp3
 *.mp4
+/package.json
+/package-lock.json
 
 # ------------------------------------------------------------------------------
 # 7. Raw Hackathon Briefs & Local Planning Drafts (Replaced by docs/)
