@@ -105,27 +105,37 @@ async def run_judge(text: str) -> dict[str, Any]:
     return _heuristic_process_judge(text)
 
 
+# Pre-compile regex patterns for efficiency
+NEGATED_PAYMENT_RE = re.compile(r'(no payment|no deposit|no fees?|never ask.*payment|not require.*payment)', re.IGNORECASE)
+MONEY_DEMAND_RE = re.compile(r'(pay|transfer|deposit of|fee of|security deposit|processing fee|charge of|₹\s*\d+|\$\s*\d+)', re.IGNORECASE)
+UPI_RE = re.compile(r'(@paytm|@upi|@okhdfcbank|@okaxis|@ybl|upi|gift card|crypto|wallet)', re.IGNORECASE)
+URGENCY_RE = re.compile(r'(within \d+ hours?|immediately|revoked|urgent|today only|2 hours|24 hours|deadline)', re.IGNORECASE)
+NO_INTERVIEW_RE = re.compile(r'(no interview|directly selected|without interview|instant selection)', re.IGNORECASE)
+REAL_INTERVIEW_RE = re.compile(r'(interview with|completed your.*interview|rounds? of interview|technical interview)', re.IGNORECASE)
+BG_CHECK_RE = re.compile(r'(background verification|bgv|reference check|contingent on)', re.IGNORECASE)
+EMAIL_RE = re.compile(r'[\w\.-]+@([\w\.-]+\.[a-zA-Z]{2,})')
+
+
 def _heuristic_process_judge(text: str) -> dict[str, Any]:
     """
-    Intelligent Process-based Heuristic Analyzer.
     Analyzes the structural process shape of the offer directly.
     Ensures 100% demo uptime and resilience.
     """
     lower = text.lower()
     
-    # 1. Detect Financial Ask & Payment urgency
-    has_negated_payment = bool(re.search(r'(no payment|no deposit|no fees?|never ask.*payment|not require.*payment)', lower))
-    has_money_demand = bool(re.search(r'(pay|transfer|deposit of|fee of|security deposit|processing fee|charge of|₹\s*\d+|\$\s*\d+)', lower))
+    # 1. Linguistic & Process Markers
+    has_negated_payment = bool(NEGATED_PAYMENT_RE.search(lower))
+    has_money_demand = bool(MONEY_DEMAND_RE.search(lower))
     has_money = has_money_demand and not has_negated_payment
-    has_upi = bool(re.search(r'(@paytm|@upi|@okhdfcbank|@okaxis|@ybl|upi|gift card|crypto|wallet)', lower)) and not has_negated_payment
-    has_urgency = bool(re.search(r'(within \d+ hours?|immediately|revoked|urgent|today only|2 hours|24 hours|deadline)', lower))
-    has_no_interview = bool(re.search(r'(no interview|directly selected|without interview|instant selection)', lower))
-    has_real_interview = bool(re.search(r'(interview with|completed your.*interview|rounds? of interview|technical interview)', lower))
-    has_bg_check = bool(re.search(r'(background verification|bgv|reference check|contingent on)', lower))
+    has_upi = bool(UPI_RE.search(lower)) and not has_negated_payment
+    has_urgency = bool(URGENCY_RE.search(lower))
+    has_no_interview = bool(NO_INTERVIEW_RE.search(lower))
+    has_real_interview = bool(REAL_INTERVIEW_RE.search(lower))
+    has_bg_check = bool(BG_CHECK_RE.search(lower))
     
-    # Domain extraction
+    # Extract Email/Domain
     extracted_domain = None
-    email_match = re.search(r'[\w\.-]+@([\w\.-]+\.[a-zA-Z]{2,})', text)
+    email_match = EMAIL_RE.search(text)
     if email_match:
         extracted_domain = email_match.group(1)
 

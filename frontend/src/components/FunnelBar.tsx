@@ -58,7 +58,7 @@ interface FunnelBarProps {
   stages: FunnelStage[]
 }
 
-export default function FunnelBar({ stages }: FunnelBarProps) {
+const FunnelBar = React.memo(function FunnelBar({ stages }: FunnelBarProps) {
   const [selectedStageId, setSelectedStageId] = useState<number>(0)
 
   // Ensure all 8 canonical stages are represented
@@ -184,4 +184,6 @@ export default function FunnelBar({ stages }: FunnelBarProps) {
       </div>
     </div>
   )
-}
+})
+
+export default FunnelBar

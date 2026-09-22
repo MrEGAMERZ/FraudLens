@@ -6,11 +6,16 @@ import { fusionScore } from '../services/fusion'
 import { extractTextFromBuffer } from '../services/extractor'
 import { scrapeUrlContent } from '../services/urlScraper'
 import { runLocalProcessJudge } from '../services/localJudge'
+import crypto from 'crypto'
 import type { ScanResult, DomainInfo } from '../types'
 
 export const scanRouter = Router()
 
 const ML_SERVICE_URL = process.env.ML_SERVICE_URL || 'http://localhost:8000'
+
+// Simple in-memory cache for efficiency
+const scanCache = new Map<string, ScanResult>()
+const CACHE_TTL_MS = 1000 * 60 * 60 // 1 hour
 
 // Configure Multer for in-memory file uploads with a 25MB boundary
 const upload = multer({
@@ -20,6 +25,10 @@ const upload = multer({
     files: 1
   }
 })
+
+function getCacheKey(text: string): string {
+  return crypto.createHash('sha256').update(text).digest('hex')
+}
 
 /**
  * Universal evaluation pipeline for all ingestion sources (Text, URL, Document Upload).
@@ -32,6 +41,14 @@ async function executeScan(
   const cleanText = text.trim()
   if (cleanText.length < 20) {
     throw new Error('Input text is too short to analyze (minimum 20 characters required).')
+  }
+
+  // Check Cache First (Efficiency Optimization)
+  const cacheKey = getCacheKey(cleanText)
+  if (scanCache.has(cacheKey)) {
+    console.log(`[CACHE HIT] Returning cached scan result for hash ${cacheKey.slice(0,8)}...`)
+    const cachedResult = scanCache.get(cacheKey)!
+    return { ...cachedResult, processingTimeMs: Date.now() - scanStartTime }
   }
 
   // 1. Process Classification via ML microservice, with graceful fallback to local heuristic judge
@@ -71,6 +88,7 @@ async function executeScan(
   const result = fusionScore(mlData, domainInfo, elapsedMs)
 
   console.log(`[SCAN_AUDIT] Completed scan in ${elapsedMs}ms | Verdict: ${result.verdict.toUpperCase()} (Threat Index: ${result.scamThreatIndex}/100)`)
+  scanCache.set(cacheKey, result)
   return result
 }
 

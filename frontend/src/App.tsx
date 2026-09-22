@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import Header from './components/Header'
-import ScannerPage from './pages/ScannerPage'
-import ThreatLibrary from './components/ThreatLibrary'
 import { Shield, Code2, Lock } from 'lucide-react'
 import './App.css'
+
+// Lazy load heavy components for code-splitting efficiency
+const ScannerPage = lazy(() => import('./pages/ScannerPage'))
+const ThreatLibrary = lazy(() => import('./components/ThreatLibrary'))
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'scanner' | 'library'>('scanner')
@@ -25,16 +27,18 @@ export default function App() {
 
       {/* Main View Area */}
       <main className="app-main">
-        <div style={{ display: activeTab === 'scanner' ? 'block' : 'none' }}>
-          <ScannerPage
-            externalPayload={prefilledPayload}
-            onResetExternalPayload={() => setPrefilledPayload(null)}
-          />
-        </div>
+        <Suspense fallback={<div className="loading-fallback">Loading intelligence modules...</div>}>
+          {activeTab === 'scanner' && (
+            <ScannerPage
+              externalPayload={prefilledPayload}
+              onResetExternalPayload={() => setPrefilledPayload(null)}
+            />
+          )}
 
-        <div style={{ display: activeTab === 'library' ? 'block' : 'none' }}>
-          <ThreatLibrary onSelectArchetype={handleSelectArchetype} />
-        </div>
+          {activeTab === 'library' && (
+            <ThreatLibrary onSelectArchetype={handleSelectArchetype} />
+          )}
+        </Suspense>
       </main>
 
       {/* Corporate Security Footer */}
