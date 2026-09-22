@@ -1,0 +1,8 @@
+.evidence-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.evidence-list { display: flex; flex-direction: column; gap: 1rem; }
+.evidence-item { display: flex; gap: 0.75rem; align-items: flex-start; }
+.evidence-tag { font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; border: 1px solid; white-space: nowrap; flex-shrink: 0; }
+.evidence-content { flex: 1; }
+.evidence-quote { font-size: 0.85rem; color: var(--muted); font-style: italic; border-left: 3px solid var(--border); padding-left: 0.75rem; margin-bottom: 0.35rem; }
+.evidence-reason { font-size: 0.82rem; color: var(--text); }
+.muted-text { color: var(--muted); font-size: 0.875rem; }

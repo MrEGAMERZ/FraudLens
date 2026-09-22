@@ -1,0 +1,7 @@
+.domain-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.domain-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.domain-row:last-of-type { border-bottom: none; }
+.domain-label { color: var(--muted); }
+.domain-value { font-weight: 500; }
+.domain-value.risk { color: var(--red); font-weight: 700; }
+.domain-warning { color: var(--amber); font-size: 0.8rem; margin-top: 0.75rem; background: #2d1f00; border: 1px solid var(--amber); border-radius: 6px; padding: 0.5rem 0.75rem; }

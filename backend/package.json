@@ -1,0 +1,26 @@
+{
+  "name": "fraudlens-backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "cors": "^2.8.5",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "dns": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^22.7.4",
+    "typescript": "^5.6.2",
+    "ts-node": "^10.9.2",
+    "nodemon": "^3.1.7"
+  }
+}

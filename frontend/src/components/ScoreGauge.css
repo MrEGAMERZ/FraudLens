@@ -1,0 +1,6 @@
+.gauge-card, .radar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.card-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1rem; }
+.gauge-wrapper { display: flex; flex-direction: column; align-items: center; }
+.gauge-svg { width: 180px; }
+.gauge-bands { display: flex; gap: 0.75rem; font-size: 0.72rem; margin-top: 0.25rem; }
+.gauge-verdict { text-align: center; border-radius: 8px; border: 1px solid; padding: 0.6rem 1rem; font-weight: 600; font-size: 0.95rem; margin-top: 0.75rem; }

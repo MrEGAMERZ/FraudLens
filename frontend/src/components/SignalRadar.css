@@ -1,0 +1,8 @@
+.radar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.signal-bars { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.signal-row { display: grid; grid-template-columns: 140px 1fr 36px 36px; align-items: center; gap: 0.5rem; }
+.signal-label { font-size: 0.78rem; color: var(--muted); }
+.signal-bar-track { height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.signal-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.signal-score { font-size: 0.78rem; font-weight: 600; text-align: right; }
+.signal-weight { font-size: 0.7rem; color: var(--muted); text-align: right; }

@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Environment — NEVER COMMIT REAL KEYS
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+frontend/dist/
+backend/dist/
+
+# Python cache
+.pytest_cache/
+
+# Raw hackathon notes & brainstorm files (non-code / working docs)
+FraudLens_Project_Idea.md
+*.pdf
+project-docs-pack.md
+CLAUDE.md

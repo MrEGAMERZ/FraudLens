@@ -1,0 +1,18 @@
+.funnel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.funnel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.funnel-stats { display: flex; gap: 1rem; font-size: 0.85rem; }
+.stat-present { color: #10b981; font-weight: 600; }
+.stat-skipped { color: #ef4444; font-weight: 600; }
+.funnel-desc { color: var(--muted); font-size: 0.8rem; margin-bottom: 1.25rem; }
+.funnel-stages { display: flex; gap: 0; overflow-x: auto; padding-bottom: 0.5rem; }
+.stage { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; min-width: 90px; position: relative; padding: 0.75rem 0.5rem; border-radius: 8px; text-align: center; }
+.stage--present { background: #05301f; border: 1px solid #10b981; }
+.stage--skipped { background: #2d0a0a; border: 1px solid #ef4444; }
+.stage--unknown { background: var(--bg); border: 1px solid var(--border); }
+.stage-number { font-size: 0.7rem; font-weight: 700; color: var(--muted); }
+.stage-name { font-size: 0.72rem; color: var(--text); line-height: 1.3; white-space: pre-line; }
+.stage-icon { font-size: 1rem; }
+.stage--present .stage-icon { color: #10b981; }
+.stage--skipped .stage-icon { color: #ef4444; }
+.stage--unknown .stage-icon { color: var(--muted); }
+.stage-connector { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 8px; height: 2px; background: var(--border); z-index: 1; }

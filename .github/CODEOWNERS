@@ -1,0 +1,17 @@
+# CODEOWNERS — FraudLens Agent Architecture
+# Each agent owns its directory and reviews PRs touching it.
+# Format: <path> <owner>
+# See docs/AGENTS.md for agent role descriptions.
+
+# Frontend Agent owns the React app
+/frontend/ @agent-frontend
+
+# Backend Agent owns the Express API
+/backend/ @agent-backend
+
+# ML Agent owns the FastAPI + Gemini judge
+/ml-service/ @agent-ml
+
+# Docs + root owned by lead (Mohammed Rehan)
+/docs/ @mohammadrehan
+*.md @mohammadrehan
