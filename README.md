@@ -20,7 +20,7 @@
 
 ### 🎥 Project Demo
 
-https://github.com/MrEGAMERZ/FraudLens/raw/main/docs/assets/brag.mp4
+![Project Demo](docs/assets/brag.gif)
 
 ---
 
