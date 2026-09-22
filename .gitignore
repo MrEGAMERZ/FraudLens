@@ -1,42 +1,84 @@
-# Dependencies
+# ==============================================================================
+# FraudLens .gitignore
+# Rules for development vs repository tracking
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Dependencies (Installable via npm install / pip install)
+# ------------------------------------------------------------------------------
 node_modules/
+.pnpm-store/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
 *.egg-info/
-dist/
-build/
 .venv/
 venv/
+ENV/
+env/
 
-# Environment — NEVER COMMIT REAL KEYS
+# ------------------------------------------------------------------------------
+# 2. Environment Variables & Secrets (CRITICAL: Never commit real API keys)
+# ------------------------------------------------------------------------------
 .env
 .env.local
 .env.*.local
+*.pem
+*.key
 
-# OS
+# ------------------------------------------------------------------------------
+# 3. Build & Compiler Outputs (Generated during build & deployment)
+# ------------------------------------------------------------------------------
+dist/
+build/
+frontend/dist/
+backend/dist/
+.cache/
+.pytest_cache/
+coverage/
+.turbo/
+.next/
+
+# ------------------------------------------------------------------------------
+# 4. Logs & Debugging
+# ------------------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ------------------------------------------------------------------------------
+# 5. OS & IDE Metadata
+# ------------------------------------------------------------------------------
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-
-# IDE
 .vscode/
 .idea/
 *.swp
+*.swo
 
-# Logs
-*.log
-npm-debug.log*
+# ------------------------------------------------------------------------------
+# 6. Scratch, Ideation & Media Assets (Keep repo lightweight and clean)
+# ------------------------------------------------------------------------------
+IDea/
+brag-output/
+.agents/
+*.ogg
+*.wav
+*.mp3
+*.mp4
 
-# Build output
-frontend/dist/
-backend/dist/
-
-# Python cache
-.pytest_cache/
-
-# Raw hackathon notes & brainstorm files (non-code / working docs)
+# ------------------------------------------------------------------------------
+# 7. Raw Hackathon Briefs & Local Planning Drafts (Replaced by docs/)
+# ------------------------------------------------------------------------------
 FraudLens_Project_Idea.md
 *.pdf
 project-docs-pack.md
