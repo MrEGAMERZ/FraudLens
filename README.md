@@ -53,6 +53,20 @@ A fraudulent offer jumps directly from **Stage 0** to **Stage 7** (*"pay for you
 
 ---
 
+## 📥 Multi-Modal Ingestion Engine (3 Input Modalities)
+
+FraudLens is engineered to ingest solicitations across all real-world attack vectors:
+
+| Ingestion Mode | Input Vector | Processing Engine & Security Controls | Max Limit |
+|---|---|---|---|
+| **📝 Text Snippet** | Direct paste from email, WhatsApp, Telegram, or LinkedIn | Instant sanitization, entity extraction, and NLP preprocessing | Up to 60,000 chars |
+| **🌐 Web URL / Link** | Career portal links, phishing URLs, or rental listing pages | **SSRF Defense Guard** (blocks `localhost`, RFC-1918 private subnets & AWS/GCP metadata `169.254.169.254`), HTML tag stripping, and direct domain extraction for RDAP/DNS checks | 8s timeout, 3MB body |
+| **📄 Document Upload** | Official offer letters, employment contracts, and PDFs | In-memory parsing via `pdf-parse` (PDF) and `mammoth` (DOCX) with zero temporary disk writes for complete data privacy | Up to 25MB file size |
+
+All three ingestion pathways funnel into the unified multi-signal evaluation pipeline, ensuring consistent scoring regardless of input format.
+
+---
+
 ## 🛡️ Multi-Modal Signal Fusion (Scam Threat Index)
 
 FraudLens does not rely on an opaque AI black box. It fuses **5 independent, inspectable signal families** into a transparent 0–100 score:
@@ -77,36 +91,35 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
 ## 🏗️ Architecture
 
 ```
-                       ┌─────────────────────────────────────────┐
-                       │           User Browser / UI             │
-                       │   https://fraud-lens-eosin.vercel.app   │
-                       └────────────────────┬────────────────────┘
-                                            │ HTTP / JSON
-                                            ▼
-                       ┌─────────────────────────────────────────┐
-                       │     Frontend (React + Vite + TS)       │
-                       │     - ScoreGauge (Radial Verdict)       │
-                       │     - FunnelBar (Skipped Stages Visual) │
-                       │     - SignalRadar (5-Axis Risk Radar)   │
-                       │     - EvidencePanel & DomainCard        │
-                       └────────────────────┬────────────────────┘
-                                            │ POST /api/scan
-                                            ▼
-                       ┌─────────────────────────────────────────┐
-                       │      Backend API (Node.js + Express)    │
-                       │      - Orchestrates scan workflow       │
-                       │      - TLS certificate verification     │
-                       │      - Multi-signal fusion engine       │
-                       └───────────┬───────────────────┬─────────┘
-                                   │                   │
-                  POST /judge      │                   │ RDAP, TLS & DNS lookups
-                                   ▼                   ▼
-      ┌──────────────────────────────────┐   ┌─────────────────────────────┐
-      │   ML Service (FastAPI + Python)  │   │  External Infrastructure    │
-      │   - Gemini 1.5/2.0 Flash Judge   │   │  - rdap.org (Keyless RDAP)  │
-      │   - Structured JSON schema       │   │  - TLS / SSL Certificate    │
-      │                                  │   │  - DNS MX Mail Verification │
-      └──────────────────────────────────┘   └─────────────────────────────┘
+     [ 📝 Raw Text ]         [ 🌐 Web Link / URL ]         [ 📄 Document PDF/DOCX ]
+            │                         │                               │
+            └─────────────────────────┼───────────────────────────────┘
+                                      │
+                                      ▼
+                        ┌─────────────────────────────────────────┐
+                        │      Frontend & CLI Scanner Interfaces  │
+                        │   - Single Page App (Vercel / React)    │
+                        │   - Standalone CLI (scripts/cli.py)     │
+                        └────────────────────┬────────────────────┘
+                                             │ HTTP POST /api/scan | /api/scan/upload
+                                             ▼
+                        ┌─────────────────────────────────────────┐
+                        │      Backend API (Node.js + Express)    │
+                        │      - In-Memory Document Extractor     │
+                        │      - SSRF-Guarded URL Scraper         │
+                        │      - Domain Intelligence (RDAP/TLS/MX)│
+                        │      - Multi-Signal Fusion Engine       │
+                        │      - Resilient Local Judge Fallback   │
+                        └───────────┬───────────────────┬─────────┘
+                                    │                   │
+                   POST /judge      │                   │ RDAP, TLS & DNS lookups
+                                    ▼                   ▼
+       ┌──────────────────────────────────┐   ┌─────────────────────────────┐
+       │   ML Service (FastAPI + Python)  │   │  External Infrastructure    │
+       │   - Gemini 1.5/2.0 Flash Judge   │   │  - rdap.org (Keyless RDAP)  │
+       │   - 8-Stage Process Classifier   │   │  - TLS / SSL Certificate    │
+       │   - Structured JSON Schema       │   │  - DNS MX Mail Verification │
+       └──────────────────────────────────┘   └─────────────────────────────┘
 ```
 
 ---
