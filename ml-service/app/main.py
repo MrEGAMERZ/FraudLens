@@ -6,7 +6,7 @@ import httpx
 import os
 import re
 
-from judge import run_judge
+from .judge import run_judge
 
 app = FastAPI(title="FraudLens ML Service", version="1.0.0")
 

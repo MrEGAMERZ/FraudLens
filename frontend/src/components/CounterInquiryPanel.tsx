@@ -106,29 +106,38 @@ Applicant`
       </div>
 
       {/* Strategy Selector Tabs */}
-      <div className="strategy-tabs-bar mono">
-        <span className="strategy-label">Response Tactic:</span>
-        <div className="strategy-buttons">
+      <div className="strategy-tabs-bar mono" role="tablist">
+        <span className="strategy-label" id="strategy-label">Response Tactic:</span>
+        <div className="strategy-buttons" aria-labelledby="strategy-label">
           <button
+            role="tab"
+            aria-selected={strategy === 'corporate_verify'}
+            aria-controls="response-textbox"
             className={`strategy-btn ${strategy === 'corporate_verify' ? 'strategy-btn--active' : ''}`}
             onClick={() => handleStrategyChange('corporate_verify')}
           >
-            <ShieldCheck size={13} />
+            <ShieldCheck size={13} aria-hidden="true" />
             <span>Demand Entity Verification</span>
           </button>
 
           <button
+            role="tab"
+            aria-selected={strategy === 'refuse_deposit'}
+            aria-controls="response-textbox"
             className={`strategy-btn ${strategy === 'refuse_deposit' ? 'strategy-btn--active' : ''}`}
             onClick={() => handleStrategyChange('refuse_deposit')}
           >
-            <span>🚫 Refuse Upfront Deposit</span>
+            <span aria-hidden="true">🚫</span> <span>Refuse Upfront Deposit</span>
           </button>
 
           <button
+            role="tab"
+            aria-selected={strategy === 'in_person_walkin'}
+            aria-controls="response-textbox"
             className={`strategy-btn ${strategy === 'in_person_walkin' ? 'strategy-btn--active' : ''}`}
             onClick={() => handleStrategyChange('in_person_walkin')}
           >
-            <span>📍 Request Office Walk-In</span>
+            <span aria-hidden="true">📍</span> <span>Request Office Walk-In</span>
           </button>
         </div>
       </div>
@@ -136,19 +145,19 @@ Applicant`
       {/* Response Display Box */}
       <div className="response-box-wrapper">
         <div className="response-box-header mono">
-          <span className="response-status-indicator">
-            <span className="status-dot-active" />
+          <span className="response-status-indicator" aria-live="polite">
+            <span className="status-dot-active" aria-hidden="true" />
             {isGenerating ? 'Synthesizing Tactical Response...' : 'Generated Safety Draft'}
           </span>
-          <button className="btn-copy-action mono" onClick={handleCopy} disabled={isGenerating}>
+          <button className="btn-copy-action mono" onClick={handleCopy} disabled={isGenerating} aria-label={copied ? "Copied" : "Copy to clipboard"}>
             {copied ? (
               <>
-                <Check size={13} className="text-emerald" />
+                <Check size={13} className="text-emerald" aria-hidden="true" />
                 <span className="text-emerald">Copied to Clipboard</span>
               </>
             ) : (
               <>
-                <Copy size={13} />
+                <Copy size={13} aria-hidden="true" />
                 <span>Copy Response</span>
               </>
             )}
@@ -156,11 +165,13 @@ Applicant`
         </div>
 
         <textarea
+          id="response-textbox"
           className="response-textarea mono"
           value={customResponse}
           onChange={(e) => setCustomResponse(e.target.value)}
           rows={11}
           placeholder="Generating counter response..."
+          aria-label="Generated safety draft response"
         />
 
         <div className="response-footer-bar mono">

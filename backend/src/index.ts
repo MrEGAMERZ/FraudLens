@@ -1,6 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import helmet from 'helmet'
+import compression from 'compression'
+import rateLimit from 'express-rate-limit'
 import { scanRouter } from './routes/scan'
 
 dotenv.config()
@@ -8,7 +11,20 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3001
 
-// Middleware stack
+// Security & Efficiency Middleware stack
+app.use(helmet())
+app.use(compression())
+
+// Rate Limiting (100 requests per 15 minutes)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests from this IP, please try again later.' }
+})
+app.use('/api/', limiter)
+
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
