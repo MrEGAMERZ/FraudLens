@@ -20,7 +20,7 @@
 
 ### 🎥 Project Demo
 
-![Project Demo](docs/assets/brag.gif)
+
 
 ---
 
