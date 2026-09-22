@@ -18,6 +18,11 @@
 
 ---
 
+### 🎥 Project Demo
+<video src="docs/assets/brag.mp4" controls width="100%"></video>
+
+---
+
 **FraudLens** is an explainable job offer and phishing scanner that detects **process compression**, not just scary keywords.
 
 Scammers have already adapted their vocabulary — they use formal corporate tone, authentic letterheads, and real employer names. Keyword scanners are a year behind the scam. FraudLens evaluates the **shape of the hiring or rental process**: legitimate funnels have multiple stages (application → screening → interview → negotiation → offer → background check → onboarding). Fraudulent offers compress 6+ stages into 1 (*"You are selected, now pay ₹4,999"*).

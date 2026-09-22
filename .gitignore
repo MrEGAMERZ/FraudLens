@@ -75,6 +75,7 @@ brag-output/
 *.wav
 *.mp3
 *.mp4
+!docs/assets/*.mp4
 /package.json
 /package-lock.json
 
