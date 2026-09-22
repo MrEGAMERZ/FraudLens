@@ -6,21 +6,26 @@
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "test": "ts-node src/verify_all_modes.ts",
     "lint": "eslint src --ext ts"
   },
   "dependencies": {
-    "express": "^4.21.0",
-    "cors": "^2.8.5",
     "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "dns": "^0.2.2"
+    "express": "^4.21.0",
+    "mammoth": "^1.12.3",
+    "multer": "^2.4.0",
+    "pdf-parse": "^2.4.5"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
     "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/multer": "^2.2.0",
     "@types/node": "^22.7.4",
-    "typescript": "^5.6.2",
+    "@types/pdf-parse": "^1.1.5",
+    "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
-    "nodemon": "^3.1.7"
+    "typescript": "^5.6.2"
   }
 }
