@@ -8,6 +8,7 @@ import AnnotatedSourceText from '../components/AnnotatedSourceText'
 import IoCTable from '../components/IoCTable'
 import DomainCard from '../components/DomainCard'
 import ProcessingScan from '../components/ProcessingScan'
+import CounterInquiryPanel from '../components/CounterInquiryPanel'
 import {
   FileText,
   Link2,
@@ -516,6 +517,11 @@ export default function ScannerPage({ externalPayload, onResetExternalPayload }:
               <IoCTable domainInfo={result.domainInfo} rawText={input} />
               <DomainCard info={result.domainInfo} />
             </div>
+          </div>
+
+          {/* AI Safe Counter-Inquiry Generator */}
+          <div className="dashboard-row-counter-inquiry">
+            <CounterInquiryPanel scanResult={result} rawInput={input} />
           </div>
         </section>
       )}
