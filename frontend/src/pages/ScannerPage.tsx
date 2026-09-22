@@ -46,7 +46,7 @@ export default function ScannerPage() {
     setResult(null)
     try {
       const payload: ScanInput = tab === 'text' ? { text: input } : { url: input }
-      const apiUrl = import.meta.env.VITE_API_URL || ''
+      const apiUrl = (import.meta as any).env.VITE_API_URL || ''
       const { data } = await axios.post<ScanResult>(`${apiUrl}/api/scan`, payload, { timeout: 30000 })
       setResult(data)
     } catch (err: any) {

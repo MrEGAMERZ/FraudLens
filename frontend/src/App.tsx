@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import ScannerPage from './pages/ScannerPage'
 import './App.css'
 
