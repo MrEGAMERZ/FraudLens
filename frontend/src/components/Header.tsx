@@ -1,13 +1,12 @@
-import { ShieldAlert, BookOpen, Terminal, Sparkles } from 'lucide-react'
+import { ShieldAlert, BookOpen, Sparkles } from 'lucide-react'
 import './Header.css'
 
 interface HeaderProps {
   activeTab: 'scanner' | 'library'
   setActiveTab: (tab: 'scanner' | 'library') => void
-  onOpenApiDocs: () => void
 }
 
-export default function Header({ activeTab, setActiveTab, onOpenApiDocs }: HeaderProps) {
+export default function Header({ activeTab, setActiveTab }: HeaderProps) {
   return (
     <header className="app-header">
       <div className="header-inner">
@@ -43,14 +42,6 @@ export default function Header({ activeTab, setActiveTab, onOpenApiDocs }: Heade
             <BookOpen className="nav-icon" size={16} />
             <span>Threat Intel Library</span>
             <span className="nav-badge">6 Archetypes</span>
-          </button>
-
-          <button
-            className="nav-item nav-item--ghost"
-            onClick={onOpenApiDocs}
-          >
-            <Terminal className="nav-icon" size={16} />
-            <span>API Docs</span>
           </button>
         </nav>
 

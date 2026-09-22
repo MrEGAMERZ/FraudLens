@@ -2,13 +2,11 @@ import { useState } from 'react'
 import Header from './components/Header'
 import ScannerPage from './pages/ScannerPage'
 import ThreatLibrary from './components/ThreatLibrary'
-import ApiDocsModal from './components/ApiDocsModal'
-import { Shield, Code2, FileText, Lock } from 'lucide-react'
+import { Shield, Code2, Lock } from 'lucide-react'
 import './App.css'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'scanner' | 'library'>('scanner')
-  const [isApiDocsOpen, setIsApiDocsOpen] = useState(false)
   const [prefilledPayload, setPrefilledPayload] = useState<string | null>(null)
 
   const handleSelectArchetype = (payload: string) => {
@@ -23,7 +21,6 @@ export default function App() {
       <Header
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onOpenApiDocs={() => setIsApiDocsOpen(true)}
       />
 
       {/* Main View Area */}
@@ -56,18 +53,6 @@ export default function App() {
 
           <div className="footer-links-group mono">
             <a
-              href="#docs"
-              onClick={(e) => {
-                e.preventDefault()
-                setIsApiDocsOpen(true)
-              }}
-              className="footer-link"
-            >
-              <FileText size={13} />
-              <span>API Integration</span>
-            </a>
-
-            <a
               href="https://github.com/MrEGAMERZ/FraudLens"
               target="_blank"
               rel="noreferrer"
@@ -89,12 +74,6 @@ export default function App() {
           <span>Engine v2.1.0 • RDAP / DNS / Gemini Flash Fusion</span>
         </div>
       </footer>
-
-      {/* API Documentation Modal */}
-      <ApiDocsModal
-        isOpen={isApiDocsOpen}
-        onClose={() => setIsApiDocsOpen(false)}
-      />
     </div>
   )
 }

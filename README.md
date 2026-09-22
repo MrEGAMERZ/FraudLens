@@ -212,6 +212,52 @@ Open `http://localhost:5173` in your browser.
 - **Legitimate Case:** A formal offer referencing an initial screening call, 2 rounds of technical interviews, salary negotiation, written benefits, conditional on background check, zero upfront fees.  
   *Result:* **Full Process Present** + **Legitimate Corporate Domain** → **Scam Threat Index ~12 (Green)**.
 
+## 🔌 Open Source & Agent Skill Integration (`SKILL.md`)
+
+FraudLens is built not just as a standalone web app, but as a **reusable security primitive** for other applications, developer platforms, and AI agents.
+
+### 1. Integrate with AI Coding Agents (Claude Code, Gemini CLI, Antigravity, Cursor)
+
+You can drop the FraudLens skill directly into your AI coding assistant:
+
+```bash
+# Copy the skill into your project or global agent directory
+mkdir -p .agents/skills/fraudlens
+cp skills/fraudlens/SKILL.md .agents/skills/fraudlens/SKILL.md
+```
+
+Your AI assistant can now audit offer letters or suspicious messages automatically during coding sessions via `/fraudlens`.
+
+### 2. Standalone CLI Tool
+
+Scan files or piped text directly from your terminal or CI/CD pipelines:
+
+```bash
+# Scan a text file directly
+python3 scripts/fraudlens_cli.py --file offer_letter.txt
+
+# Or scan via standard input
+echo "Dear applicant, send Rs 4999 for laptop" | python3 scripts/fraudlens_cli.py
+```
+
+### 3. REST API for Job Boards & HR Tech Portals
+
+Automate screening for job postings in your own React / Node.js platforms:
+
+```typescript
+import axios from 'axios'
+
+async function checkJobPosting(offerText: string) {
+  const { data } = await axios.post('https://fraud-lens-eosin.vercel.app/api/scan', {
+    text: offerText
+  })
+  
+  if (data.scamThreatIndex >= 61) {
+    console.warn('Flagged as scam! Skipped stages:', data.funnelStages.filter(s => s.status === 'skipped'))
+  }
+}
+```
+
 ---
 
 ## 👥 Team & Acknowledgments
