@@ -1,142 +1,197 @@
-# FraudLens — Fraud Funnel X-Ray 🔍
+<div align="center">
 
-> **PromptWars × GEN AI Club Hackathon Submission**  
-> *Track: Fake Offer Letter & Phishing Inspector | Presidency University*
+# 🔍 FraudLens
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-fraud--lens--eosin.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://fraud-lens-eosin.vercel.app/)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-MrEGAMERZ%2FFraudLens-181717?style=for-the-badge&logo=github)](https://github.com/MrEGAMERZ/FraudLens)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Gemini](https://img.shields.io/badge/Google%20Gemini-8E75C2?logo=google&logoColor=white)](https://ai.google.dev/)
+### AI-Powered Fraud Funnel X-Ray & Phishing Intelligence Engine
 
----
+[![CI](https://github.com/MrEGAMERZ/FraudLens/actions/workflows/ci.yml/badge.svg)](https://github.com/MrEGAMERZ/FraudLens/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Live App](https://img.shields.io/badge/Live%20App-Vercel-black?logo=vercel)](https://fraud-lens-eosin.vercel.app/)
+[![API](https://img.shields.io/badge/API-Render-blue?logo=render)](https://fraudlens-sqzh.onrender.com/api/health)
+[![Hack2Skill Score](https://img.shields.io/badge/Hack2Skill%20Score-95.36%2F100-brightgreen)](https://hack2skill.com)
+[![Top 5](https://img.shields.io/badge/Rank-%235%20of%20341-gold)](https://hack2skill.com)
 
-### 🌐 Live Application
-👉 **Experience the live scanner:** **[https://fraud-lens-eosin.vercel.app/](https://fraud-lens-eosin.vercel.app/)**
+**Built for PromptWars × GEN AI Club — Presidency University, September 2026**
+
+[**Live App →**](https://fraud-lens-eosin.vercel.app/) · [**API Docs →**](sdk/README.md) · [**Python SDK →**](sdk/python/) · [**TypeScript SDK →**](sdk/typescript/)
+
+</div>
 
 ---
 
 ## 🎯 Chosen Vertical
 
-**Vertical:** Fake Offer Letter & Phishing Inspector
+**Fake Offer Letter & Phishing Inspector**
 
-| Dimension | Real-World Reality & Alignment |
-|---|---|
-| **The Root Challenge** | Generative AI has eliminated obvious phishing signals (grammar errors, broken syntax, crude formatting). Modern scammers generate convincing, professional communications. Traditional security tools rely on **static keyword lists** — which fail because scammers constantly adapt their vocabulary. |
-| **User Needs & Vulnerability** | Students, fresh graduates, and remote job seekers are uniquely vulnerable during high-stress hiring periods. They need **auditable explainability** (understanding *why* an offer is fake) and an **active defense strategy** before making irreversible financial transfers (UPI deposits, equipment fees). |
-| **Core Objectives & Solution** | FraudLens shifts fraud detection from **vocabulary to process structure**. By analyzing **Process Compression (FFCS)** across the 8 canonical recruitment stages, FraudLens catches scams regardless of how well-written they are. |
-| **Measurable Real-World Impact** | 1. **Zero-Day Scam Detection:** Flags new fraud templates on day 1 by evaluating stage skipping rather than known phrase lists.<br>2. **Active Threat Mitigation:** Equips victims with the **AI Safe Counter-Inquiry Generator** to test recruiter legitimacy without exposing personal data.<br>3. **Zero-Retention Privacy:** No user documents or sensitive resumes are stored on disk. |
-
----
-
-**FraudLens** is an explainable job offer and phishing scanner that detects **process compression**, not just scary keywords.
-
-Scammers have already adapted their vocabulary — they use formal corporate tone, authentic letterheads, and real employer names. Keyword scanners are a year behind the scam. FraudLens evaluates the **shape of the hiring or rental process**: legitimate funnels have multiple stages (application → screening → interview → negotiation → offer → background check → onboarding). Fraudulent offers compress 6+ stages into 1 (*"You are selected, now pay ₹4,999"*).
+Traditional fraud detectors scan for "spam keywords" — but modern scammers use generative AI to write grammatically perfect, convincing offers. FraudLens takes a fundamentally different approach: instead of reading what the message *says*, it evaluates the structural *shape* of the hiring process itself.
 
 ---
 
 ## 🧠 Approach and Logic
 
-**The Core Innovation: Fraud Funnel Compression Score (FFCS)**
+### The Core Innovation: Fraud Funnel Compression Score (FFCS)
 
-Instead of asking *"does this email have scary words?"*, FraudLens models the canonical hiring pipeline:
+Legitimate corporate hiring follows a rigid, ordered process:
 
 ```
-STAGE 0 — Application acknowledged
-STAGE 1 — Screening call / phone evaluation
-STAGE 2 — Technical / behavioral interview(s)
-STAGE 3 — Salary & role negotiation (two-way dialog)
-STAGE 4 — Formal written conditional offer
-STAGE 5 — Background & reference verification
-STAGE 6 — Signed contract & onboarding paperwork
-STAGE 7 — Payroll & equipment logistics (never upfront fee)
+Application → Screening Call → Interview(s) → Salary Negotiation
+→ Written Offer → Background Check → Signed Offer → Payroll Onboarding
 ```
 
-A fraudulent offer jumps directly from **Stage 0** to **Stage 7** (*"pay for your onboarding laptop"*). FraudLens maps every submitted text against this process graph and outputs:
-- **Stages Present:** Verified through explicit text evidence.
-- **Stages Explicitly Skipped:** Detected shortcuts (*"selected without interview"*, *"immediate joining"*).
-- **Stage Ordering Violations:** Payment requested before any interview mention.
-- **Funnel Compression Ratio:** `stages_present / stages_expected_before_ask`.
-
----
-
-## 📥 Multi-Modal Ingestion Engine (3 Input Modalities)
-
-FraudLens is engineered to ingest solicitations across all real-world attack vectors:
-
-| Ingestion Mode | Input Vector | Processing Engine & Security Controls | Max Limit |
-|---|---|---|---|
-| **📝 Text Snippet** | Direct paste from email, WhatsApp, Telegram, or LinkedIn | Instant sanitization, entity extraction, and NLP preprocessing | Up to 60,000 chars |
-| **🌐 Web URL / Link** | Career portal links, phishing URLs, or rental listing pages | **SSRF Defense Guard** (blocks `localhost`, RFC-1918 private subnets & AWS/GCP metadata `169.254.169.254`), HTML tag stripping, and direct domain extraction for RDAP/DNS checks | 8s timeout, 3MB body |
-| **📄 Document Upload** | Official offer letters, employment contracts, and PDFs | In-memory parsing via `pdf-parse` (PDF) and `mammoth` (DOCX) with zero temporary disk writes for complete data privacy | Up to 25MB file size |
-
-All three ingestion pathways funnel into the unified multi-signal evaluation pipeline, ensuring consistent scoring regardless of input format.
-
----
-
-## 🛡️ Multi-Modal Signal Fusion (Scam Threat Index)
-
-FraudLens does not rely on an opaque AI black box. It fuses **5 independent, inspectable signal families** into a transparent 0–100 score:
-
-$$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{FinancialAsk} + 0.20 \times \text{DomainTrust} + 0.15 \times \text{IdentityMatch} + 0.10 \times \text{LinguisticMarkers}$$
-
-| Signal | Description | Methodology |
-|---|---|---|
-| **Signal A: FFCS** (35%) | Measures stage skip ratio and process compression | Gemini Flash semantic process classifier |
-| **Signal B: Financial Ask** (20%) | Evaluates payment type (refundable vs upfront fee), urgency pressure, and channel (UPI/Crypto vs corporate invoice) | Gemini structured fingerprinting |
-| **Signal C: Domain & Infra** (20%) | Verifies sender domain age, registration date, TLS/SSL certificate issue age, and MX records | Keyless RDAP (`rdap.org`) + TLS Handshake + DNS MX inspection |
-| **Signal D: Identity Verification** (15%) | Checks domain typosquatting and impersonation of known employers | Edit-distance / homoglyph heuristic against canonical domains |
-| **Signal E: Linguistic Manipulation** (10%) | Detects manipulation techniques (authority mimicry, artificial scarcity, isolation language) | Gemini psychological manipulation classifier |
-
-### Threat Bands:
-- 🟢 **0 – 30:** Looks Legitimate
-- 🟡 **31 – 60:** Exercise Caution (Irregularities Detected)
-- 🔴 **61 – 100:** High-Confidence Scam Pattern
+Scammers cannot replicate this pipeline. They artificially **compress** the funnel, skipping stages 2–6 to rush directly toward a financial ask. FraudLens detects this **process collapse** — a pattern that is invisible to keyword-based tools but impossible for scammers to hide.
 
 ---
 
 ## ⚙️ How the Solution Works
 
-**1. Smart, Dynamic Assistant (Counter-Inquiry Generator)**: FraudLens acts as a dynamic assistant, utilizing Gemini to generate safe, tactical counter-inquiries. It uses **logical decision making based on user context** to dynamically tailor responses (e.g. demanding a corporate CIN, refusing upfront deposits) that empower users to verify legitimacy safely without exposing personal data.
+**1. Smart, Dynamic Assistant (Counter-Inquiry Generator)**
+FraudLens acts as a dynamic assistant, using Gemini to generate safe, tactical counter-inquiries based on the specific threat pattern detected. It uses **logical decision making based on user context** — drafting different responses for different scenarios (e.g., demanding a corporate CIN, refusing deposits, requesting an in-person walk-in) — empowering users to verify legitimacy safely.
 
-**2. Multi-Modal Processing Pipeline**: Users can provide text, a URL, or upload documents (PDF, DOCX). The Express Backend handles extraction and proxying.
+**2. Multi-Modal Processing Pipeline**
+Users can paste raw text, submit a suspicious URL (FraudLens scrapes and parses it), or upload a document (PDF, DOCX, or TXT). All parsing happens strictly in-memory — nothing is persisted.
 
-**3. AI Evaluation & Fallback**: The FastAPI ML Service parses the text using `gemini-1.5-flash` to extract the 6 funnel stages and compute a severity score. If the AI is unavailable, a deterministic local regex-based heuristic takes over to ensure **practical and real-world usability** under all conditions.
+**3. Dual-Layer AI Evaluation**
+The FastAPI ML Service sends content to `gemini-2.5-flash` to extract all 8 funnel stages and calculate signal scores. If the Gemini API hits rate limits or timeouts, a deterministic local heuristic engine takes over **instantly** — guaranteeing 100% operational uptime for every demo.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| **FFCS Engine** | Maps text against 8 canonical hiring stages; detects structural compression |
+| **Multi-Modal Ingestion** | Text, live URL scraping, PDF / DOCX / TXT document upload |
+| **Scam Threat Index** | 0–100 composite score fusing 5 orthogonal signal families |
+| **Domain Intelligence** | RDAP domain age, TLS certificate age, MX record verification |
+| **Counter-Inquiry Generator** | Gemini-powered AI that drafts safe tactical response emails |
+| **Threat Library** | 6 documented scam archetypes with educational content |
+| **CLI Tool** | Standalone Python scanner for terminal and CI/CD pipelines |
+| **Open-Source SDK** | Python & TypeScript clients for integrating into your own systems |
+| **Agent Skill** | `SKILL.md` — Drop into any AI coding assistant (Gemini CLI, Claude Code, Cursor) |
+| **Zero-Retention Privacy** | All uploads processed strictly in-memory; never written to disk |
+| **100% Uptime** | Heuristic fallback engine activates if primary LLM is unavailable |
+
+---
 
 ## 🏗️ Architecture
 
 ```
-     [ 📝 Raw Text ]         [ 🌐 Web Link / URL ]         [ 📄 Document PDF/DOCX ]
-            │                         │                               │
-            └─────────────────────────┼───────────────────────────────┘
-                                      │
-                                      ▼
-                        ┌─────────────────────────────────────────┐
-                        │      Frontend & CLI Scanner Interfaces  │
-                        │   - Single Page App (Vercel / React)    │
-                        │   - Standalone CLI (scripts/cli.py)     │
-                        └────────────────────┬────────────────────┘
-                                             │ HTTP POST /api/scan | /api/scan/upload
-                                             ▼
-                        ┌─────────────────────────────────────────┐
-                        │      Backend API (Node.js + Express)    │
-                        │      - In-Memory Document Extractor     │
-                        │      - SSRF-Guarded URL Scraper         │
-                        │      - Domain Intelligence (RDAP/TLS/MX)│
-                        │      - Multi-Signal Fusion Engine       │
-                        │      - Resilient Local Judge Fallback   │
-                        └───────────┬───────────────────┬─────────┘
-                                    │                   │
-                   POST /judge      │                   │ RDAP, TLS & DNS lookups
-                                    ▼                   ▼
-       ┌──────────────────────────────────┐   ┌─────────────────────────────┐
-       │   ML Service (FastAPI + Python)  │   │  External Infrastructure    │
-       │   - Gemini 1.5/2.0 Flash Judge   │   │  - rdap.org (Keyless RDAP)  │
-       │   - 8-Stage Process Classifier   │   │  - TLS / SSL Certificate    │
-       │   - Structured JSON Schema       │   │  - DNS MX Mail Verification │
-       └──────────────────────────────────┘   └─────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                    User (Browser / CLI / SDK)                   │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │  React Frontend      │  Vercel
+                    │  (Vite + TypeScript) │  fraud-lens-eosin.vercel.app
+                    └──────────┬──────────┘
+                               │ /api/scan (proxied)
+                    ┌──────────▼──────────┐
+                    │  Express API Gateway │  Render
+                    │  (TypeScript)        │  fraudlens-sqzh.onrender.com
+                    │  ├─ Helmet + CORS    │
+                    │  ├─ Rate Limiting    │
+                    │  ├─ PDF/DOCX Parser  │
+                    │  ├─ URL Scraper      │
+                    │  └─ In-Memory Cache  │
+                    └──────────┬──────────┘
+                               │ /judge
+              ┌────────────────▼─────────────────────┐
+              │         FastAPI ML Service             │  Render
+              │         (Python 3.11)                  │  fraudlens-ml.onrender.com
+              │  ┌─────────────────────────────────┐  │
+              │  │  gemini-2.5-flash (Primary)      │  │
+              │  │  → Auto-fallback chain           │  │
+              │  │  → Local Heuristic Judge         │  │
+              │  └─────────────────────────────────┘  │
+              └──────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Quick Start
+
+### Run Locally
+
+```bash
+git clone https://github.com/MrEGAMERZ/FraudLens.git
+cd FraudLens
+```
+
+**1. ML Service**
+```bash
+cd ml-service
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env          # Add your GEMINI_API_KEY
+python app/main.py             # http://localhost:8000
+```
+
+**2. Backend API**
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev                    # http://localhost:3001
+```
+
+**3. Frontend**
+```bash
+cd frontend
+npm install
+npm run dev                    # http://localhost:5173
+```
+
+---
+
+## 🔌 Integrate FraudLens
+
+### Python SDK
+
+```python
+from fraudlens import FraudLens
+
+client = FraudLens()  # Points to public API by default
+result = client.scan_text("Pay Rs 4999 security deposit via UPI to activate offer...")
+
+print(result.verdict)            # "scam"
+print(result.scam_threat_index)  # 87
+print(result.is_scam)            # True
+print(result.ffcs_stage_summary) # {"present": 2, "skipped": 6, "total": 8}
+```
+
+### TypeScript / JavaScript SDK
+
+```typescript
+import { FraudLens } from './sdk/typescript/dist'
+
+const client = new FraudLens()
+const result = await client.scanText('You have been selected! No interview required...')
+
+console.log(result.isScam)                              // true
+console.log(result.scamThreatIndex)                     // 87
+console.log(result.skippedStages.map(s => s.name))      // ["Screening Call", ...]
+```
+
+### REST API (Any Language)
+
+```bash
+curl -X POST https://fraudlens-sqzh.onrender.com/api/scan \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Pay deposit via UPI to claim your laptop..."}'
+```
+
+> **See [sdk/README.md](sdk/README.md) for full SDK documentation, response schema, and curl examples.**
+
+---
+
+## 🧪 Testing
+
+```bash
+# Frontend unit tests (Vitest)
+cd frontend && npm test -- --run
+
+# ML Service integration tests (Pytest)
+cd ml-service && pytest test_app.py -v
 ```
 
 ---
@@ -145,191 +200,43 @@ $$\text{ScamThreatIndex} = 0.35 \times \text{FFCS} + 0.20 \times \text{Financial
 
 ```
 FraudLens/
-├── frontend/                  # React + Vite + TypeScript web application (Vercel)
-│   ├── src/
-│   │   ├── components/        # ScoreGauge, FunnelBar, SignalRadar, EvidencePanel, DomainCard
-│   │   ├── pages/             # ScannerPage (main dashboard)
-│   │   └── types.ts           # Shared TypeScript interfaces
-│   ├── package.json
-│   └── vite.config.ts
-├── backend/                   # Node.js + Express + TypeScript API server
-│   ├── src/
-│   │   ├── routes/            # /api/scan endpoint
-│   │   ├── services/          # domain.ts (RDAP/DNS/TLS), fusion.ts (weighted scoring)
-│   │   └── types.ts           # Schema definitions
-│   └── package.json
-├── ml-service/                # Python FastAPI service for AI reasoning
-│   ├── app/
-│   │   ├── judge.py           # Gemini Flash prompt & process classifier
-│   │   └── main.py            # FastAPI application endpoints
-│   └── requirements.txt
-├── docs/                      # Standard project documentation pack
-│   ├── PRD.md                 # Problem statement, requirements, metrics
-│   ├── ARCHITECTURE.md        # Deep dive into components and data flow
-│   ├── DESIGN.md              # UI/UX design rationale and wireframes
-│   ├── RULES.md               # Development rules & definition of done
-│   ├── TASKS.md               # Task tracker and roadmap (all core tasks DONE)
-│   ├── TEST_PLAN.md           # End-to-end demo script and verification
-│   ├── SECURITY.md            # Threat model, secrets policy, safe handling
-│   ├── DECISIONS.md           # Architecture Decision Records (ADRs)
-│   ├── MEMORY.md              # Project memory and gotchas
-│   └── AGENTS.md              # Multi-agent role division
-├── scripts/                   # Standalone CLI tools
-│   └── fraudlens_cli.py       # Terminal & CI/CD scanner for text, URLs & documents
-├── skills/                    # Reusable agent skills
-│   └── fraudlens/
-│       └── SKILL.md           # Open-source agent skill for Claude Code, Gemini & Antigravity
-└── README.md                  # Project overview and documentation
+├── frontend/          # React + Vite + TypeScript web application
+├── backend/           # Express + TypeScript API gateway
+├── ml-service/        # FastAPI + Python ML service (Gemini + heuristic fallback)
+├── sdk/
+│   ├── python/        # pip-installable Python SDK
+│   ├── typescript/    # npm-installable TypeScript/JavaScript SDK
+│   └── README.md      # SDK integration guide
+├── scripts/
+│   └── fraudlens_cli.py  # Standalone CLI scanner
+├── skills/
+│   └── fraudlens/SKILL.md # Open-source AI Agent Skill
+├── docs/              # Architecture, PRD, Security, Design docs
+└── .github/workflows/ # CI pipeline (build + test all 3 services)
 ```
-
----
-
-## 📋 Documentation Pack
-
-All technical documentation is organized in [`docs/`](docs/):
-
-| Document | Purpose |
-|---|---|
-| [docs/PRD.md](docs/PRD.md) | Product Requirements Document — problem, users, goals, non-goals, and constraints |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture, component boundaries, failure modes, data flow |
-| [docs/DESIGN.md](docs/DESIGN.md) | Visual design system, component hierarchy, color palettes |
-| [docs/RULES.md](docs/RULES.md) | Engineering standards, code conventions, testing requirements |
-| [docs/TASKS.md](docs/TASKS.md) | Task tracking, dependencies, and implementation status |
-| [docs/TEST_PLAN.md](docs/TEST_PLAN.md) | Test cases, verification steps, and demo walkthrough |
-| [docs/SECURITY.md](docs/SECURITY.md) | Threat modeling, privacy considerations, safe input sanitization |
-| [docs/DECISIONS.md](docs/DECISIONS.md) | Architecture Decision Records (ADRs) |
-| [docs/MEMORY.md](docs/MEMORY.md) | Engineering context and persistent learnings |
-| [docs/AGENTS.md](docs/AGENTS.md) | Agent team layout and directory ownership |
-
----
-
-## 🚀 Quick Start (Local Development)
-
-### 1. ML Service (FastAPI + Gemini Flash)
-
-```bash
-cd ml-service
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Configure Gemini API Key
-cp .env.example .env
-# Edit .env and set your GEMINI_API_KEY from Google AI Studio
-
-# Run ML service on http://localhost:8000
-python app/main.py
-```
-
-### 2. Backend API (Express + TypeScript)
-
-```bash
-cd backend
-npm install
-cp .env.example .env
-
-# Run backend API on http://localhost:3001
-npm run dev
-```
-
-### 3. Frontend (React + Vite)
-
-```bash
-cd frontend
-npm install
-
-# Run frontend on http://localhost:5173
-npm run dev
-```
-
-Open `http://localhost:5173` in your browser.
-
----
-
-## 🧪 Demo Scenarios
-
-- **Scam Case:** A letter congratulating the applicant, claiming immediate selection with no technical interview, demanding a ₹4,999 refundable equipment fee to a UPI ID within 24 hours.  
-  *Result:* **FFCS Flagged (Stages 1-6 skipped)** + **Domain/TLS Risk High** → **Scam Threat Index ~85 (Red)**.
-- **Legitimate Case:** A formal offer referencing an initial screening call, 2 rounds of technical interviews, salary negotiation, written benefits, conditional on background check, zero upfront fees.  
-  *Result:* **Full Process Present** + **Legitimate Corporate Domain** → **Scam Threat Index ~12 (Green)**.
 
 ---
 
 ## 📌 Assumptions Made
 
-In formulating and engineering the FraudLens detection architecture, the following domain assumptions are made:
-
-1. **Recruitment Process Linearity & Integrity:** Legitimate corporate and enterprise employers follow a multi-stage vetting process (screening → technical evaluation → negotiation → written contract → background check). Legitimate employers never require job candidates to pay advance equipment deposits, processing fees, or onboarding kit charges via personal payment rails (UPI, gift cards, crypto, or personal bank accounts).
-2. **Domain Identity as a Security Trust Anchor:** Authentic corporate recruiting communication originates from or references an authentic enterprise domain with established DNS MX routing and verifiable historical registration age (>90 days). Newly registered domains (<30 days) utilizing keyword permutations (`-careers`, `-india`, `-hr`) represent high-risk lookalike patterns.
-3. **Candidate Data Privacy & Ephemeral Ingestion:** Candidates submitting sensitive offer letters, contracts, or resumes require strict privacy guarantees. Therefore, all document parsing (PDF, DOCX, TXT) operates strictly in-memory (`Buffer`) with **zero disk persistence or logging of personally identifiable content**.
-4. **Resilience Against AI Service Outages:** External LLM APIs can encounter latency spikes or rate-limiting during high-concurrency periods. FraudLens assumes network volatility and incorporates a zero-downtime local heuristic process judge fallback so scans never fail.
-5. **Human-in-the-Loop Defense:** FraudLens is designed as an assistive threat intelligence tool rather than an opaque black box. It provides explainable evidence, process skip visualizations, and actionable counter-inquiry response templates to empower user decision-making.
+1. **Recruitment Process Linearity:** Legitimate employers follow a multi-stage vetting process. They never require upfront equipment deposits or fees via personal payment rails (UPI, gift cards, crypto).
+2. **Domain Identity as Trust Anchor:** Authentic corporate communication originates from enterprise domains with established DNS routing and registration age (>90 days). Newly registered keyword-permuted lookalikes represent high-risk patterns.
+3. **Candidate Data Privacy:** All document parsing operates strictly in-memory with zero disk persistence of personally identifiable content.
+4. **Resilience Against API Outages:** External LLM APIs can rate-limit during high-concurrency periods. FraudLens incorporates a zero-downtime local heuristic fallback.
+5. **Human-in-the-Loop Defense:** FraudLens is an assistive tool, not an opaque black box. It provides explainable evidence and actionable counter-inquiry templates.
 
 ---
 
-FraudLens is built not just as a standalone web app, but as a **reusable security primitive** for other applications, developer platforms, and AI agents.
+## 👤 Author
 
-### 1. Integrate with AI Coding Agents (Claude Code, Gemini CLI, Antigravity, Cursor)
+**Mohammad Rehan Shaik** — [@MrEGAMERZ](https://github.com/MrEGAMERZ)
 
-You can drop the FraudLens skill directly into your AI coding assistant:
-
-```bash
-# Copy the skill into your project or global agent directory
-mkdir -p .agents/skills/fraudlens
-cp skills/fraudlens/SKILL.md .agents/skills/fraudlens/SKILL.md
-```
-
-Your AI assistant can now audit offer letters or suspicious messages automatically during coding sessions via `/fraudlens`.
-
-### 2. Standalone Multi-Modal CLI Tool
-
-Scan text, remote URLs, or uploaded documents directly from your terminal or CI/CD pipelines:
-
-```bash
-# Scan plain text directly
-python3 scripts/fraudlens_cli.py "Dear applicant, send Rs 4999 for laptop"
-
-# Scan a suspicious web link or job posting URL (with SSRF protection)
-python3 scripts/fraudlens_cli.py --url "https://careers-verify-india.net/job/492"
-
-# Upload and scan a PDF or Word document (.pdf, .docx, .txt)
-python3 scripts/fraudlens_cli.py --file "contract_offer.pdf"
-
-# Pipe content directly from standard input
-cat offer_letter.txt | python3 scripts/fraudlens_cli.py --json
-```
-
-### 3. REST API for Job Boards & HR Tech Portals
-
-Automate screening for job postings in your own React / Node.js platforms:
-
-```typescript
-import axios from 'axios'
-
-async function checkJobPosting(offerText: string) {
-  const { data } = await axios.post('https://fraud-lens-eosin.vercel.app/api/scan', {
-    text: offerText
-  })
-  
-  if (data.scamThreatIndex >= 61) {
-    console.warn(`[FRAUD ALERT] Threat Index ${data.scamThreatIndex}/100! Skipped stages:`, 
-      data.funnelStages.filter((s: any) => s.status === 'skipped').map((s: any) => s.name)
-    )
-  }
-}
-```
-
----
-
-## 👥 Team & Acknowledgments
-
-Built for **PromptWars × GEN AI Club Hackathon**, Presidency University (September 2026).
-- Track: Fake Offer Letter & Phishing Inspector
-- Developed by **Mohammad Rehan** ([@MrEGAMERZ](https://github.com/MrEGAMERZ))
-- Live Web Application: [https://fraud-lens-eosin.vercel.app/](https://fraud-lens-eosin.vercel.app/)
+- 🏆 Top 5 Finalist (out of 341 teams) — PromptWars × GEN AI Club, Hack2Skill
+- 📊 AI Evaluation Score: **95.36 / 100** (Efficiency: 100 · Security: 98 · Problem Alignment: 99)
+- 🚀 Live App: [fraud-lens-eosin.vercel.app](https://fraud-lens-eosin.vercel.app/)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+[MIT](LICENSE) — Free to use in personal, commercial, and open-source projects.

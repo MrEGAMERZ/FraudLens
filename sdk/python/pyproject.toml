@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "fraudlens"
+version = "1.0.0"
+description = "Official Python SDK for the FraudLens Fraud Funnel X-Ray API"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Mohammad Rehan Shaik", email = "mregamerz@gmail.com" }]
+keywords = ["fraud-detection", "phishing", "scam", "security", "ai", "gemini"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+requires-python = ">=3.9"
+dependencies = ["httpx>=0.27,<1.0"]
+
+[project.urls]
+Homepage = "https://fraud-lens-eosin.vercel.app"
+Repository = "https://github.com/MrEGAMERZ/FraudLens"
+"Bug Tracker" = "https://github.com/MrEGAMERZ/FraudLens/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fraudlens*"]

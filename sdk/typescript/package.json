@@ -1,0 +1,22 @@
+{
+  "name": "fraudlens-sdk",
+  "version": "1.0.0",
+  "description": "Official TypeScript/JavaScript SDK for the FraudLens Fraud Detection API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["fraud-detection", "phishing", "scam", "security", "ai", "typescript"],
+  "author": "Mohammad Rehan Shaik",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrEGAMERZ/FraudLens"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
